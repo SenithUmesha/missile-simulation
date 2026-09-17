@@ -1,0 +1,15 @@
+# NetBeans / Ant output
+build/
+dist/
+nbproject/private/
+
+# Java
+*.class
+*.log
+hs_err_pid*
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
