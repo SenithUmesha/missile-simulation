@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+
+      - name: Install Ant
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ant
+
+      - name: Verify generated output is not tracked
+        run: |
+          if git ls-files build dist nbproject/private | grep -q .; then
+            echo "Generated or machine-local files are tracked."
+            git ls-files build dist nbproject/private
+            exit 1
+          fi
+
+      - name: Build application
+        run: ant clean jar
+
+      - name: Verify jar output
+        run: test -f dist/PDSA_CW2_T1.jar
