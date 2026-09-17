@@ -108,13 +108,27 @@ public class MBoxFail extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnretryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnretryActionPerformed
-        // TODO add your handling code here:
+        // Retry the level that produced this failure instead of restarting the campaign.
+        if (Map3.MapNum == 1) {
+            Map3.MapNum = 0;
+            new Map3().setVisible(true);
+        }
+        else if (Map2.MapNum == 1) {
+            Map2.MapNum = 0;
+            new Map2().setVisible(true);
+        }
+        else {
+            Map1.MapNum = 0;
             new Map1().setVisible(true);
-            this.setVisible(false);
+        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnretryActionPerformed
 
     private void btnhomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhomeActionPerformed
-        // TODO add your handling code here:
+        // Clear level markers before returning to the beginning of the game.
+        Map1.MapNum = 0;
+        Map2.MapNum = 0;
+        Map3.MapNum = 0;
         new Home().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnhomeActionPerformed
